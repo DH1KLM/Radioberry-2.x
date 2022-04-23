@@ -29,7 +29,7 @@ if (NOT SoapySDR_FOUND)
     message(WARNING "SoapySDR development files not found - skipping support")
     return()
 endif ()
-
+set(CMAKE_CXX_STANDARD 14)
 #include_directories(${MY_DEVICE_INCLUDE_DIRS})
 SOAPY_SDR_MODULE_UTIL(
     TARGET SoapyRadioberrySDR
@@ -37,6 +37,8 @@ SOAPY_SDR_MODULE_UTIL(
 	SoapyRadioberry.cpp
 	SoapyRadioberrySettings.cpp
 	SoapyRadioberryStreaming.cpp
+	i2c.cpp
+	i2c.h
 	radioberry_ioctl.h
     
 )
