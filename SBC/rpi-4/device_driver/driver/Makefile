@@ -1,9 +1,23 @@
+CCFLAGS += -Wcast-function-type
+
+KERNEL_HEADERS=/lib/modules/$(shell uname -r)/build
+
+obj-m := radioberry.o
+	
+	
 KERNEL_HEADERS=/lib/modules/$(shell uname -r)/build
 
 obj-m := radioberry.o
 
-radioberry.ko:
-	@$(MAKE) -C $(KERNEL_HEADERS) M=$(PWD) modules
+all: radioberry dt	
+	 echo Build Device Tree Overlay and kernel module.
+
+
+radioberry:
+	@$(MAKE) -C $(KERNEL_HEADERS) M=$(PWD) modules   
+
+dt:
+	dtc -@ -I dts -O dtb -o radioberry.dtbo radioberry.dts
 
 clean:      
 	@$(MAKE) -C $(KERNEL_HEADERS) M=$(PWD) clean
